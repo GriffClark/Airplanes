@@ -1,4 +1,7 @@
 import java.util.Scanner;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 /** Questions
  * How am I going to determine which flights will go to where?
@@ -27,6 +30,7 @@ public class Driver {
 		ArrayList<Persons> totalPopulation = new ArrayList<Persons>(); // This is adjustable when using for size
 		ArrayList<Airport> airports = new ArrayList<Airport>();
 		ArrayList<Integer> tailNumbers = new ArrayList<>(); //to store the tail numbers of every plane to make sure that no two planes have the same tail number
+		ArrayList<Airplane> airplanes = new ArrayList<Airplane>();
 		
 		//Roughly the population of the usa is 323100000
 		System.out.println("enter max population > 0");
@@ -132,6 +136,7 @@ public class Driver {
 			 if (laInternational.isFull() == false) { //if the airport is not full do a thing
 				 Airbus_A380 abus = new Airbus_A380();
 				 laInternational.addPlane(abus);
+				 airplanes.add(abus);
 
 			 }
 		 }
@@ -145,6 +150,7 @@ public class Driver {
 			 {
 				 Airbus_A380 abus = new Airbus_A380();
 				 oHare.addPlane(abus);
+				 airplanes.add(abus);
 			 }
 		 }
 		
@@ -157,7 +163,47 @@ public class Driver {
 
 		 }
 		 
+		 //initializing the map
+		 /**
+		  * for starters this is just going to be a basic grid and things will move at a fixed rate. However, eventually I would like to make this grid actually look like the USA and have it be massive
+		  */
 		 
+		 Airport[][] airportMap = new Airport [10][10];
+		 
+		 for (int i = 0; i < airportMap.length; i++)
+		 {
+			 for(int j = 0; j < airportMap[0].length; j++)
+			 {
+				 airportMap[i][j] = null;
+				 //fills the airportMap with null values
+			 }
+		 }
+		 
+		 airportMap[3][4] = oHare;
+		 airportMap[6][9] = laInternational;
+		 airportMap[4][1] = militaryAirport1;
+		 airportMap[9][0] = privateAirport1;
+		 
+		 //now I am going to try and build a representation of this 
+		 
+		 char[][]airportMapDisplay = new char[10][10];
+		 
+		 for (int i = 0; i < airportMapDisplay.length; i++)
+		 {
+			 for (int j = 0; j < airportMapDisplay[0].length; j++)
+			 {
+				 if(airportMap[i][j] != null)
+				 {
+					 airportMapDisplay[i][j] = airportMap[i][j].getAirportType(); //this returns a char which can then be put onto the map
+					
+					
+				 }
+				 System.out.print(airportMapDisplay[i][j] + " ");
+				
+			 }
+			 System.out.println();
+		 }
+
 		 
 		 
 		 //done initializing things
@@ -173,6 +219,21 @@ public class Driver {
 		{
 			//at the start of each run increment time up by one minute
 			minute ++; 
+			
+			for (int i = 0; i < airplanes.size(); i++)
+			{
+				//this will add 1 fuel to every plane on the ground and subtract one fuel from every plane in the air
+				
+				if(airplanes.get(i).isGrounded() == true)
+				{
+				airplanes.get(i).addFuel();
+				//note that fuel is added at the same rate for every plane
+				}
+				else
+				{
+					airplanes.get(i).loseFuel();
+				}
+			}
 			
 			if (minute == 60)
 			{

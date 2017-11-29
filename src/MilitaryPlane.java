@@ -4,17 +4,14 @@
  */
 public class MilitaryPlane extends Airplane{
 	
-	public MilitaryPlane(int maxPassengers, int passengers, double cargo, double maxCargo, boolean hasSecureCargo,
-			AirplaneType type, int speed, String name, int tailNumber) {
-		super(maxPassengers, passengers, cargo, maxCargo, hasSecureCargo, type, speed, name, tailNumber);
 		
-		hasSecureCargo = true;
-		type = Airplane.AirplaneType.Military;
-		
-	}
+	
 	
 	public MilitaryPlane()
 	{
+		super();
+		hasSecureCargo = true;
+		type = Airplane.AirplaneType.Military;
 		
 	}
 	

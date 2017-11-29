@@ -12,7 +12,6 @@ public class Airport {
 	
 	protected int maxPlanes;
 	protected int currentPlanes;
-	protected PlanesAccepted accepted;
 	protected int population;
 	protected String name;
 	protected PlanesAccepted planesAccepted;
@@ -28,6 +27,34 @@ public class Airport {
 	
 	public Airport()
 	{
+		
+	}
+	
+	public char getAirportType()
+	//how do I properly use the enum here?
+	{
+		char type = '!'; //need to set it as set this to something
+		
+		//this is for my display in driver class
+		switch (planesAccepted) //getter a Null Pointer Exception error here and not sure why. Also additionally after it is saying there is an error @ Driver.java:194
+		{
+		case Commercial:
+			type = 'C';
+			break;
+			
+		case Military:
+			type = 'M';
+			break;
+		
+		
+		case Private:
+			type = 'P';
+			break;
+		default:
+			type = '.'; 
+			break;
+		}
+		return type;
 		
 	}
 	
@@ -74,7 +101,7 @@ public class Airport {
 	
 	public void addAttribute(PlanesAccepted accepted)
 	{
-		this.accepted = accepted;
+		this.planesAccepted = accepted;
 	}
 	
 	public void addPlane(Airplane planeToBeAdded)

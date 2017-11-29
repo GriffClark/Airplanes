@@ -1,20 +1,13 @@
 
 public class PassengerPlane extends Airplane{
-
+		
 	
-	public PassengerPlane(int maxPassengers, int passengers, double cargo, double maxCargo, boolean hasSecureCargo,
-			AirplaneType type, int speed, String name, int tailNumber) {
-		super(maxPassengers, passengers, cargo, maxCargo, hasSecureCargo, type, speed, name, tailNumber);
-		
-		maxCargo = 0; //passenger planes are not cargo planes
-		hasSecureCargo = false;
-		type = Airplane.AirplaneType.Commercial;
-		
-	}
 	
 	public PassengerPlane()
 	{
-		
+		maxCargo = 0; //passenger planes are not cargo planes
+		hasSecureCargo = false;
+		type = Airplane.AirplaneType.Commercial;
 	}
 
 	public boolean isBigPlane()

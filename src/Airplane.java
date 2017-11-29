@@ -12,23 +12,45 @@ public class Airplane {
 	protected boolean hasSecureCargo; //for simplicity sake secureCargo weight can go in with cargo weight
 	protected AirplaneType type;
 	protected int speed;
+	protected int maxFuel;
 	protected String name;
 	protected int tailNumber;
+	protected int currentFuel;
+	protected boolean isGrounded;
+	protected int range;
+	protected int distancePerFuel;
+	
+	public int getRange() 
+	{
+		//distancePerFuel is how quickly fuel is used
+		//speed is how quickly the plane moves
+		//current fuel is how much gas is left in the tank
+		
+		
+		int range = distancePerFuel * speed * currentFuel;
+		return range;
+		//this will be used when destinations are being chosen
+	}
+
 	
 	public Airplane()
 	{
 		
 	}
 	
-	public Airplane(int maxPassengers, int passengers, double cargo, double maxCargo, boolean hasSecureCargo, AirplaneType parameters, int speed, String name, int tailNumber)
+	public void touchDown()
 	{
-		this.passengers = passengers;
-		this.cargo = cargo;
-		this.hasSecureCargo = hasSecureCargo;
-		this.type = parameters;
-		this.speed = speed;
-		this.name = name;
-		this.tailNumber = tailNumber;
+		isGrounded = true;
+	}
+	
+	public void takeOff()
+	{
+		isGrounded = false;
+	}
+	
+	public boolean isGrounded()
+	{
+		return isGrounded;
 	}
 	
 	
@@ -51,7 +73,26 @@ public class Airplane {
 		return hasPassengers;
 	}
 	
+	public int getFuel()
+	{
+		return currentFuel;
+	}
 	
+	public void addFuel(int modifier)
+	{
+		currentFuel += modifier;
+	}
+	
+	public void loseFuel()
+	{
+		currentFuel -= 1;
+	}
+	
+	public void addFuel()
+	{
+		//to call every time I want to refuel
+		currentFuel += 1;
+	}
 	
 	public void setName(String name)
 	{
