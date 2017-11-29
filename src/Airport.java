@@ -11,19 +11,19 @@ public class Airport {
 	
 	
 	protected int maxPlanes;
-	protected int currentPlanes;
+	protected int currentPlanes; //dont need this
 	protected int population;
 	protected String name;
 	protected PlanesAccepted planesAccepted;
 	
-	public Airport (PlanesAccepted planesAccepted, int currentPlanes, int maxAirplanes, int population, String name)
-	{
-		this.maxPlanes = maxAirplanes;
-		this.currentPlanes = currentPlanes;
-		this.planesAccepted = planesAccepted;
-		this.population = population;
-		this.name = name;
-	}
+//	public Airport (PlanesAccepted planesAccepted, int currentPlanes, int maxAirplanes, int population, String name)
+//	{
+//		this.maxPlanes = maxAirplanes;
+//		this.currentPlanes = currentPlanes;
+//		this.planesAccepted = planesAccepted;
+//		this.population = population;
+//		this.name = name;
+//	}
 	
 	public Airport()
 	{

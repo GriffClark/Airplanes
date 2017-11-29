@@ -27,7 +27,8 @@ public class Airplane {
 		//current fuel is how much gas is left in the tank
 		
 		
-		int range = distancePerFuel * speed * currentFuel;
+		int range = distancePerFuel* currentFuel;
+		//if you go a certian speed your distance goes down make this a calc problem
 		return range;
 		//this will be used when destinations are being chosen
 	}

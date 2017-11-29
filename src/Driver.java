@@ -42,6 +42,7 @@ public class Driver {
 		if (desiredPopulation <=0 )
 		{
 			System.out.println("error. please enter a positive number");
+			
 		}
 
 				 
@@ -215,7 +216,9 @@ public class Driver {
 		 int year = 0;	
 		
 		//this is where I run my simulation minute by minute
-		while(true)
+		
+		 
+		 while(true)
 		{
 			//at the start of each run increment time up by one minute
 			minute ++; 
@@ -251,7 +254,8 @@ public class Driver {
 			{
 				day -= 7;
 				week ++;
-			}
+			}  //DateTime
+			//threading import threading package and at end of lopp thread.sleep for some amount of time
 			
 			if (week == 52)
 			{
