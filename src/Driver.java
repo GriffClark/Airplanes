@@ -1,6 +1,14 @@
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Date;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javax.swing.*;
 
 /** Questions
@@ -10,16 +18,19 @@ import javax.swing.*;
  */
 
 import java.util.ArrayList;
+import java.util.Calendar;
 public class Driver {
 	
 	/**
 	 * Eventually I want to set each thing (initializing airports, building population, adding airplanes...) into it's own method in a seprate class, then call that in the driver class
 	 * The driver class will only contain the actual simulation
 	 * This is just formatting; doing this should not change how the code runs but just cleans it up
+	 * @throws ParseException 
+	 * @throws InterruptedException 
 	 */
 	
 
-	public static void main (String[] args)
+	public static void main (String[] args) throws ParseException, InterruptedException
 	{
 		//starting to initialize things 
 		
@@ -51,13 +62,11 @@ public class Driver {
 		 PublicAirport laInternational = new PublicAirport();
 		 laInternational.setName("Los Angeles International");
 		 laInternational.setMaxPlanes(100);
-		 ArrayList <Persons> laInternationalPop= new ArrayList<Persons>();
 		 airports.add(laInternational); //adds this airport to my list of airports
 		 
 		 PublicAirport oHare = new PublicAirport();
 		 oHare.setName("O'Hare International");
 		 oHare.setMaxPlanes(50);
-		 ArrayList<Persons> oHareInternationalPop = new ArrayList<Persons>();
 		 airports.add(oHare);
 		 
 		 PrivateAirport privateAirport1 = new PrivateAirport();
@@ -79,7 +88,31 @@ public class Driver {
 		{//adds people to the population<>
 			Persons person = new Persons();
 			person.setName ("boring human no. " + i);
-			person.setAge((int)((Math.random()) * 80)); 
+			person.setAge((int)((Math.random()) * 80));
+			person.setMoney( (int) (person.getAge() * (Math.random() * 100) ));
+			
+			//this part is going to be very slow but necessary
+			
+			person.setIdNo();
+			int n = -1;
+			while (n == -1) {
+			n =0;
+			for (int b = 0; b < totalPopulation.size(); b++)
+			{
+				if (person.getIdNo() == totalPopulation.get(b).getIdNo() && totalPopulation.size() >= 1) //only generating 1 person
+				{
+					person.setIdNo();
+					n = -1;
+					break;
+					
+				}
+				
+				
+			}
+			}
+			
+			
+			
 			totalPopulation.add(person);
 			System.out.println(person.toString());
 			if (i == desiredPopulation)
@@ -104,8 +137,9 @@ public class Driver {
 			/**
 			 * have to go through it backwards to prevent against overflow errors because the arrayList is constantly adjusting size
 			 */
-					 laInternationalPop.add(totalPopulation.get(i)); 
-					 totalPopulation.remove(i); 
+//			
+				 laInternational.addPerson(totalPopulation.get(i));
+				 totalPopulation.remove(i); 
 			 }
 			 
 			 
@@ -113,7 +147,7 @@ public class Driver {
 			 //and to make sure that the entire population got added to the airport
 			 for (int i = (totalPopulation.size() -1 ); i > 0; i--)
 			 {
-				 oHareInternationalPop.add(totalPopulation.get(i));
+				 oHare.addPerson(totalPopulation.get(i));
 				 totalPopulation.remove(i);
 
 			 }			 
@@ -136,6 +170,7 @@ public class Driver {
 		 {
 			 if (laInternational.isFull() == false) { //if the airport is not full do a thing
 				 Airbus_A380 abus = new Airbus_A380();
+				 tailNumbers.add(abus.getTailNumber()); //still need to make it so that each plane can only have 1 tail number. Do the same thing I did for persons ID
 				 laInternational.addPlane(abus);
 				 airplanes.add(abus);
 
@@ -151,6 +186,7 @@ public class Driver {
 			 {
 				 Airbus_A380 abus = new Airbus_A380();
 				 oHare.addPlane(abus);
+				 tailNumbers.add(abus.getTailNumber());
 				 airplanes.add(abus);
 			 }
 		 }
@@ -208,20 +244,27 @@ public class Driver {
 		 
 		 
 		 //done initializing things
-		 
-		 int minute = 0;
-		 int hour = 0;
-		 int day = 0;
-		 int week = 0;
-		 int year = 0;	
+	
 		
-		//this is where I run my simulation minute by minute
+		//setting the initial time. This is basically a black box to me right now
 		
-		 
+		String dt = "2008-01-01 12:00";  // Start date
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Calendar c = Calendar.getInstance();
+		c.setTime(sdf.parse(dt));
+		
+		//debug
+		System.out.println("ABUS data");
+		Airbus_A380 abusdata = new Airbus_A380();
+		abusdata.printChart();
+		
+		 //THIS IS WHERE THINGS START TO HAPPEN:
 		 while(true)
 		{
-			//at the start of each run increment time up by one minute
-			minute ++; 
+			 c.add(Calendar.MINUTE, 1);  // number of minutes to add
+			dt = sdf.format(c.getTime());  // dt is now the new date
+			
+			
 			
 			for (int i = 0; i < airplanes.size(); i++)
 			{
@@ -238,37 +281,18 @@ public class Driver {
 				}
 			}
 			
-			if (minute == 60)
-			{
-				minute -=60;
-				hour ++;
-			}
-			
-			if (hour == 24)
-			{
-				hour -= 24;
-				day++;
-			}
-			
-			if (day == 7)
-			{
-				day -= 7;
-				week ++;
-			}  //DateTime
-			//threading import threading package and at end of lopp thread.sleep for some amount of time
-			
-			if (week == 52)
-			{
-				week -= 52;
-				year++;
-			}
+		  //DateTime
+			//threading import threading package and at end of loop thread.sleep for some amount of time
+				
+	
 			
 			//debug
-			System.out.println("time works");
-			break;
+			System.out.println(c.getTime());
+			TimeUnit.SECONDS.sleep(1);
 			
 		}
 		
+		 //clause saying if user wants the values of a plane they can enter the name or tail number and have it print the toString
 	}
 	
 }
