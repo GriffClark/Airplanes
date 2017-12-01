@@ -283,39 +283,62 @@ public class Driver {
 			System.out.println(totalPopulation.get(i).toString());
 		}
 		
+		
+		
 		 //THIS IS WHERE THINGS START TO HAPPEN:
+		int wagePayoutTimer = 0;
 		 while(true)
 		{
 			 c.add(Calendar.MINUTE, 1);  // number of minutes to add
 			dt = sdf.format(c.getTime());  // dt is now the new date
 			
+			wagePayoutTimer++;
 			
-			
+			if (wagePayoutTimer == 60)
+			{
+				for (int i = 0; i < totalPopulation.size(); i++)
+				{
+					totalPopulation.get(i).addMoney(10 + totalPopulation.get(i).getAge()); //right now each person makes 10 dollars an hour + their age
+				}
+				wagePayoutTimer = 0;
+				//pays everyone then resets the timer
+			}
+		
+
 			for (int i = 0; i < airplanes.size(); i++)
 			{
 				//this will add 1 fuel to every plane on the ground and subtract one fuel from every plane in the air
 				
 				if(airplanes.get(i).isGrounded() == true)
 				{
-				airplanes.get(i).addFuel();
+				airplanes.get(i).addFuel(); // need to create unique addFuel methods for each plane because they won't fuel at the same rate
 				//note that fuel is added at the same rate for every plane
 				}
 				else
 				{
-					airplanes.get(i).loseFuel();
+					airplanes.get(i).loseFuel(); // still need to finish working on this loseFuel method based on the rangeTable that I am creating
 				}
 			}
 			
+			//this is where people will purchase tickets
+			/*
+			 * pull a number of people from totalPopulation
+			 * have each of those people buy a ticket for a certian date
+			 */
+			
+			
 		  //DateTime
 			//threading import threading package and at end of loop thread.sleep for some amount of time
-				
-	
-			
-			//debug
+
+			//this always needs to be the last peice of code in the while loop
 			System.out.println(c.getTime());
 			TimeUnit.SECONDS.sleep(1);
 			
 			break;
+			
+			/**
+			 * something to note: in this model people do not get older or reproduce. Wages are static
+			 */
 			
 		}
 		

@@ -25,6 +25,7 @@ public class Airplane extends Position{
 	protected int distancePerFuel;
 	protected int[][] rangeMap = new int[50][2];
 	protected String location;
+	protected String owner;
 
 	public int getRange()
 	{
@@ -42,6 +43,16 @@ public class Airplane extends Position{
 	public String getLocation()
 	{
 		return location;
+	}
+	
+	public void setOwner(String owner)
+	{
+		this.owner = owner;
+	}
+	
+	public String getOwner()
+	{
+		return owner;
 	}
 
 

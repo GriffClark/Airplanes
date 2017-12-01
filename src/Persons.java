@@ -1,16 +1,41 @@
 import java.util.ArrayList;
 public class Persons {
-	private String name;
-	private int age;
-	private int timesFlown;
-	private int money;
-	private int happiness;
-	private int idNo;
-	private String location;
+	protected String name;
+	protected int age;
+	protected int timesFlown;
+	protected int money;
+	protected int happiness;
+	protected int idNo;
+	protected String location;
+	protected Airport desiredDestination; // this is gonna be tough because this is where I have to start managing layovers
+	
+	ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+	
 	
 	public String getLocation()
 	{
 		return location;
+	}
+	
+	public void purchaseTicket(String startLocation, String endLocation, int cost, String fromCompany)
+	{
+		
+		Ticket ticket = new Ticket(cost, startLocation, endLocation, fromCompany);
+		
+		if( cost > money)
+		{
+			System.out.println("Error illigal purchase by " + name);
+			System.out.println("Cost of ticket: " + cost + " > "+ name+ "'s $" + money);
+		}
+		
+		else
+		{
+			
+			this.money -= cost;
+			tickets.add(ticket);
+			
+		}
+
 	}
 	
 	public void setLocation(String location)
@@ -48,6 +73,11 @@ public class Persons {
 	{
 		this.money =  ((int) ( (Math.random() * 100 * age) ))  ^ 2;
 		//the amount of money you have increases as you get exponentially
+	}
+	
+	public void addMoney(int money)
+	{
+		this.money += money;
 	}
 	
 	public int getMoney()
