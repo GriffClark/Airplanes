@@ -2,7 +2,7 @@
 public class Ticket {
 	
 	protected int cost;
-	protected String fromCompany; //which company issued the ticket
+	protected Company fromCompany; //which company issued the ticket
 	protected Airport startLocation;
 	protected Airport endLocation;
 	//should I have a total location?
@@ -29,12 +29,12 @@ public class Ticket {
 		this.cost = cost;
 	}
 	
-	public String getFromCompany()
+	public Company getFromCompany()
 	{
 		return fromCompany;
 	}
 	
-	public void setFromCompany(String fromCompany)
+	public void setFromCompany(Company fromCompany)
 	{
 		this.fromCompany = fromCompany;
 	}
@@ -66,8 +66,16 @@ public class Ticket {
 		return distance;
 	}
 	
-	public Ticket(int cost, String startLocation, String endLocation, String fromCompany) //and I don't know how to add dateTimePurchased
+	public static int ticketCost(Airport startLocation, Airport endLocation) // You don't need to create a ticket in order to use this so static right??
 	{
+		int cost = 1; //just so I can test it
+		//now I need to build a function that will determine the distance between two points
+		return cost;
+	}
+	
+	public Ticket(Airport startLocation, Airport endLocation, Company fromCompany) //and I don't know how to add dateTimePurchased
+	{
+		cost = Ticket.ticketCost(startLocation, endLocation);
 		hasBeenUsed = false; //when you generate a ticket it has not been used yet
 	}
 

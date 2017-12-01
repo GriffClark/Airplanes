@@ -79,6 +79,10 @@ public class Driver {
 		 ArrayList<Persons> militaryAirport1Pop = new ArrayList<Persons>();
 		 airports.add(militaryAirport1);
 		 
+		 //setting up a company for testing purposes
+		 
+		 Company company = new Company();
+		 
 
 		//first thing to do is to populate the planet... right?
 				
@@ -110,30 +114,29 @@ public class Driver {
 			}
 			}
 			
-			//this is to figure out where the person goes. Feels very innefecient but not sure how to make it better yet
 			
 			if(person.getIdNo() % 3 == 0|| person.getIdNo() % 5 ==0 )
 			{
-				person.setLocation("LA International");
+				person.setLocation(laInternational);
 				laInternational.addPerson(person);
 			}
 			
 			else if (person.getIdNo() % 7 == 0)
 			{
-				person.setLocation("privateAirport1");
+				person.setLocation(privateAirport1);
 				privateAirport1.addPerson(person);
 			}
 			
 			else if (person.getIdNo() % 9 == 0)
 			{
-				person.setLocation("militaryAirport1");
+				person.setLocation(militaryAirport1);
 				militaryAirport1.addPerson(person);
 			}
 			
 			//this will be my catch cluase
 			else
 			{
-				person.setLocation("O'Hare International");
+				person.setLocation(oHare);
 				oHare.addPerson(person);
 			}
 			totalPopulation.add(person);
@@ -289,6 +292,7 @@ public class Driver {
 		int wagePayoutTimer = 0;
 		 while(true)
 		{
+			 //this should always be the first statement in the loop
 			 c.add(Calendar.MINUTE, 1);  // number of minutes to add
 			dt = sdf.format(c.getTime());  // dt is now the new date
 			
@@ -310,6 +314,7 @@ public class Driver {
 				//this will add 1 fuel to every plane on the ground and subtract one fuel from every plane in the air
 				
 				if(airplanes.get(i).isGrounded() == true)
+					//eventually I will turn this into a choice but for now it is a mandatory refuel
 				{
 				airplanes.get(i).addFuel(); // need to create unique addFuel methods for each plane because they won't fuel at the same rate
 				//note that fuel is added at the same rate for every plane
@@ -323,16 +328,53 @@ public class Driver {
 			//this is where people will purchase tickets
 			/*
 			 * pull a number of people from totalPopulation
-			 * have each of those people buy a ticket for a certian date
+			 * have each of those people buy a ticket for a certain date
 			 */
 			
+			//this will give 1% of people an urge to fly to a random location
 			
-		  //DateTime
-			//threading import threading package and at end of loop thread.sleep for some amount of time
-
-			//this always needs to be the last peice of code in the while loop
+			for(int i = 0; i < (totalPopulation.size()/100)+1; i++)
+			{
+				ArrayList<Persons> peopleWhoFly = new ArrayList<Persons>(); //this is where I will put everyone that wants to fly
+				int personPicker = (int)(Math.random() * totalPopulation.size());
+				peopleWhoFly.add(totalPopulation.get(personPicker)); //1% of the population will randomly be added
+				//I need to build a check here to make sure that the same peson doesn't get added more than once, but I don't know how to write that
+				
+				//for now each person will want to go to a random location
+				Persons person = peopleWhoFly.get(i); //so I don't have to keep retyping it
+				
+				int randomChooser = (int)(Math.random() * airports.size());
+				Airport desiredAirport = airports.get(randomChooser);
+				person.setDesiredLocation(desiredAirport);
+				
+				//now to check if person is eligible to get a ticketCost
+				int costChecker = Ticket.ticketCost(person.getLocation(), person.getDesiredDestination());
+				
+				if(person.getMoney() >= costChecker)
+				{
+					Ticket ticket = new Ticket (person.getLocation(), person.getDesiredDestination(), company);
+					person.addTicket(ticket); //addTicket already subtracts the cost of ticket from money
+				}
+				
+				//what should I do if the person cannot afford a ticket? I could either try again, set them aside and do nothing, or set them aside and pull a new person
+				
+				/**
+				 * Eventually there will be a whole automatic process for deciding which company people want to buy their tickets through
+				 */
+			}
+			
+			/**
+			 * So right now people are purchasing a ticket for a flight, and they don't care when the flight is. I am going to change it so that they give an ideal travel time
+			 */
+			
+			//this is temporary. Eventually flights will be generated to match up with times too
+			
+			//also not quite sure how to go about doing this. Help wanted. 
+			
+			
+			//this always needs to be the last piece of code in the while loop
 			System.out.println(c.getTime());
-			TimeUnit.SECONDS.sleep(1);
+			TimeUnit.SECONDS.sleep((long) 0.1);
 			
 			break;
 			

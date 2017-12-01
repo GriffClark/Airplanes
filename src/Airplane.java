@@ -1,10 +1,11 @@
-import java.util.HashMap;
-
-import com.sun.javafx.collections.MappingChange.Map;
-
+/**
+ * Eventually implementation of first class and needing pilots and crew before launch
+ * @author Griffin 
+ *
+ */
 public class Airplane extends Position{
 
-	public enum AirplaneType {
+	public enum AirplaneType { //is this public?
 		Commercial, Private, Military, Cargo
 	}
 
@@ -26,6 +27,7 @@ public class Airplane extends Position{
 	protected int[][] rangeMap = new int[50][2];
 	protected String location;
 	protected String owner;
+	protected int fuelCost;
 
 	public int getRange()
 	{
@@ -104,7 +106,17 @@ public class Airplane extends Position{
 
 	public void addFuel(int modifier)
 	{
-		currentFuel += modifier;
+	
+		if (currentFuel + modifier > maxFuel)
+		{
+			System.out.println("too much fuel error at airplane " + name + " " + tailNumber + " @ location " + location);
+			//can't put too much fuel in a plane
+		}
+		
+		else {
+			currentFuel += modifier;
+			
+		}
 	}
 
 	public void loseFuel()

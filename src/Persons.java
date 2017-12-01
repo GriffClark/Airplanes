@@ -1,4 +1,11 @@
 import java.util.ArrayList;
+
+/**
+ * Eventually I want to make there be a few types of crew members that planes need to launch: FLight attendents and pilots
+ * Also, I am going to make a random number of air marshalls that will take flights
+ * @author Griffin 
+ *
+ */
 public class Persons {
 	protected String name;
 	protected int age;
@@ -6,39 +13,27 @@ public class Persons {
 	protected int money;
 	protected int happiness;
 	protected int idNo;
-	protected String location;
+	protected Airport location;
 	protected Airport desiredDestination; // this is gonna be tough because this is where I have to start managing layovers
+	protected ArrayList<Ticket> tickets = new ArrayList<Ticket>();
 	
-	ArrayList<Ticket> tickets = new ArrayList<Ticket>();
 	
-	
-	public String getLocation()
+	public Airport getLocation()
 	{
 		return location;
 	}
 	
-	public void purchaseTicket(String startLocation, String endLocation, int cost, String fromCompany)
+	public Airport getDesiredDestination()
 	{
-		
-		Ticket ticket = new Ticket(cost, startLocation, endLocation, fromCompany);
-		
-		if( cost > money)
-		{
-			System.out.println("Error illigal purchase by " + name);
-			System.out.println("Cost of ticket: " + cost + " > "+ name+ "'s $" + money);
-		}
-		
-		else
-		{
-			
-			this.money -= cost;
-			tickets.add(ticket);
-			
-		}
-
+		return desiredDestination;
 	}
 	
-	public void setLocation(String location)
+	public void setDesiredLocation(Airport desiredDestination)
+	{
+		this.desiredDestination = desiredDestination;
+	}
+	
+	public void setLocation(Airport location)
 	{
 		this.location = location;
 	}
@@ -46,6 +41,12 @@ public class Persons {
 	public Persons()
 	{
 		happiness = 100; //everyone starts 100% happy
+	}
+	
+	public void addTicket(Ticket ticket)
+	{
+		money -= ticket.getCost(); //automatically subtracts the cost of the ticket from your money
+		tickets.add(ticket);
 	}
 	
 	public void setIdNo()
@@ -98,24 +99,6 @@ public class Persons {
 	public String getName()
 	{
 		return name;
-	}
-	
-	public boolean isTraveling()
-	
-	//not sure if I need this
-	
-	{//isTraveling is to determine if they want to schedule a flight
-		boolean isTraveling;
-		int random = (int)((Math.random())*200);
-		if (random == 69)
-		{
-			isTraveling = true;
-		}
-		else
-		{
-			isTraveling = false;
-		}
-		return isTraveling;
 	}
 	
 	public String toString()
