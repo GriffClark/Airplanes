@@ -2,7 +2,7 @@ import java.util.HashMap;
 
 import com.sun.javafx.collections.MappingChange.Map;
 
-public class Airplane extends Location{
+public class Airplane extends Position{
 
 	public enum AirplaneType {
 		Commercial, Private, Military, Cargo
@@ -24,18 +24,24 @@ public class Airplane extends Location{
 	protected int range;
 	protected int distancePerFuel;
 	protected int[][] rangeMap = new int[50][2];
+	protected String location;
 
 	public int getRange()
 	{
-		//distancePerFuel is how quickly fuel is used
-		//speed is how quickly the plane moves
-		//current fuel is how much gas is left in the tank
-
-
 		int range = distancePerFuel* currentFuel;
 		//if you go a certian speed your distance goes down make this a calc problem
 		return range;
 		//this will be used when destinations are being chosen
+	}
+	
+	public void setLocation (String location)
+	{
+		this.location = location;
+	}
+	
+	public String getLocation()
+	{
+		return location;
 	}
 
 

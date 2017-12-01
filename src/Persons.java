@@ -6,8 +6,17 @@ public class Persons {
 	private int money;
 	private int happiness;
 	private int idNo;
+	private String location;
 	
-	ArrayList <Persons> population = new ArrayList<Persons>();
+	public String getLocation()
+	{
+		return location;
+	}
+	
+	public void setLocation(String location)
+	{
+		this.location = location;
+	}
 	
 	public Persons()
 	{
@@ -35,9 +44,10 @@ public class Persons {
 		this.happiness += h;
 	}
 	
-	public void setMoney(int money)
+	public void setMoney()
 	{
-		this.money = money;
+		this.money =  ((int) ( (Math.random() * 100 * age) ))  ^ 2;
+		//the amount of money you have increases as you get exponentially
 	}
 	
 	public int getMoney()
@@ -45,9 +55,9 @@ public class Persons {
 		return money;
 	}
 	
-	public void setAge (int age)
+	public void setAge ()
 	{
-		this.age = age;
+		this.age = (int)((Math.random()) * 80) + 5; // no person younger than 5 years old I think
 	}
 	
 	public int getAge()
@@ -61,6 +71,9 @@ public class Persons {
 	}
 	
 	public boolean isTraveling()
+	
+	//not sure if I need this
+	
 	{//isTraveling is to determine if they want to schedule a flight
 		boolean isTraveling;
 		int random = (int)((Math.random())*200);
@@ -77,7 +90,7 @@ public class Persons {
 	
 	public String toString()
 	{
-		return name;
+		return name + " who is " + age + " years old @ location " + location + " with $" + money + " and ID number: " + idNo;
 	}
 	
 	public int timesFlown()

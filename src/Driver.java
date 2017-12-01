@@ -35,9 +35,7 @@ public class Driver {
 		//starting to initialize things 
 		
 		Scanner s = new Scanner (System.in);
-		
-
-		
+	
 		ArrayList<Persons> totalPopulation = new ArrayList<Persons>(); // This is adjustable when using for size
 		ArrayList<Airport> airports = new ArrayList<Airport>();
 		ArrayList<Integer> tailNumbers = new ArrayList<>(); //to store the tail numbers of every plane to make sure that no two planes have the same tail number
@@ -87,9 +85,9 @@ public class Driver {
 		for (int i = 0; i < desiredPopulation; i++) 
 		{//adds people to the population<>
 			Persons person = new Persons();
-			person.setName ("boring human no. " + i);
-			person.setAge((int)((Math.random()) * 80));
-			person.setMoney( (int) (person.getAge() * (Math.random() * 100) ));
+			person.setName ("person number" + i);
+			person.setAge();
+			person.setMoney();
 			
 			//this part is going to be very slow but necessary
 			
@@ -107,12 +105,37 @@ public class Driver {
 					
 				}
 				
+				//ideally instead of a while loop I could do this recusively so it would look nicer and be easier to understand but as it is I am not sure how to do that
 				
 			}
 			}
 			
+			//this is to figure out where the person goes. Feels very innefecient but not sure how to make it better yet
 			
+			if(person.getIdNo() % 3 == 0|| person.getIdNo() % 5 ==0 )
+			{
+				person.setLocation("LA International");
+				laInternational.addPerson(person);
+			}
 			
+			else if (person.getIdNo() % 7 == 0)
+			{
+				person.setLocation("privateAirport1");
+				privateAirport1.addPerson(person);
+			}
+			
+			else if (person.getIdNo() % 9 == 0)
+			{
+				person.setLocation("militaryAirport1");
+				militaryAirport1.addPerson(person);
+			}
+			
+			//this will be my catch cluase
+			else
+			{
+				person.setLocation("O'Hare International");
+				oHare.addPerson(person);
+			}
 			totalPopulation.add(person);
 			System.out.println(person.toString());
 			if (i == desiredPopulation)
@@ -254,9 +277,11 @@ public class Driver {
 		c.setTime(sdf.parse(dt));
 		
 		//debug
-		System.out.println("ABUS data");
-		Airbus_A380 abusdata = new Airbus_A380();
-		abusdata.printChart();
+		System.out.println("Debug Data");
+		for(int i = 0; i < totalPopulation.size(); i++)
+		{
+			System.out.println(totalPopulation.get(i).toString());
+		}
 		
 		 //THIS IS WHERE THINGS START TO HAPPEN:
 		 while(true)
@@ -289,6 +314,8 @@ public class Driver {
 			//debug
 			System.out.println(c.getTime());
 			TimeUnit.SECONDS.sleep(1);
+			
+			break;
 			
 		}
 		

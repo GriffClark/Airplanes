@@ -39,7 +39,7 @@ public class Airbus_A380 extends PassengerPlane{
 		for (int i = 0; i < rangeMap.length; i++)
 		{//this is doing weird things but I don't feel like fixing it now. Moved it out here to see if anything would change
 			int desiredSpeed = i*15;
-			rangeMap[i][0] = desiredSpeed; 
+			rangeMap[i][0] = ((1/10) * desiredSpeed) + 1; //this is clearly not working please help
 			for (int j = 0; j < rangeMap[0].length; j++)
 			{
 				if (i > 0) //cannot have desired speed be zero

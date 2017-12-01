@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-public class Airport extends Location{
+public class Airport extends Position{
 	 
 	protected enum PlanesAccepted
 	{
