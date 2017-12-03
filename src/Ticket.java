@@ -8,6 +8,8 @@ public class Ticket {
 	//should I have a total location?
 	protected String dateTimePuchased; //for this I need to pull from the DateTime in my driver class. Not sure how to do that
 	protected boolean hasBeenUsed;
+	protected int ticketVerification;
+	//how to I make a time variable for when the ticket is for??
 	
 	public boolean getHasBeenUsed()
 	{
@@ -32,6 +34,12 @@ public class Ticket {
 	public Company getFromCompany()
 	{
 		return fromCompany;
+	}
+	
+	public void generateTicketVarification(Ticket ticket) 
+	{
+		//need to figure out how to create a verification number for each ticket
+		int ticketVarification;
 	}
 	
 	public void setFromCompany(Company fromCompany)

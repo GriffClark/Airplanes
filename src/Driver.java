@@ -367,7 +367,7 @@ public class Driver {
 			 * So right now people are purchasing a ticket for a flight, and they don't care when the flight is. I am going to change it so that they give an ideal travel time
 			 */
 			
-			//this is temporary. Eventually flights will be generated to match up with times too
+			//so ideally what will happen is... how do I figure out the flights thing??? figuring out how to schedeul them
 			
 			//also not quite sure how to go about doing this. Help wanted. 
 			
@@ -383,6 +383,11 @@ public class Driver {
 			 */
 			
 		}
+		 
+		 /**
+		  * need to figure out a way to generate a flight id number that the tickets can match up with
+		  * Example: if I buy a ticket from LA to O'Hare for 11/14/12 at 07:59 that needs to match the flight leaving LA at that dateTime
+		  */
 		
 		 //clause saying if user wants the values of a plane they can enter the name or tail number and have it print the toString
 	}
