@@ -6,6 +6,10 @@ import java.util.ArrayList;
  * @author Griffin 
  *
  */
+
+/*
+ * going to take ages to initalize so need to find a faster way to generate tons of people quickly... what about doing it part at a time and only generating certian parts when they are needed
+ */
 public class Persons {
 	protected String name;
 	protected int age;
