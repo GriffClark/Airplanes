@@ -114,23 +114,28 @@ public class Driver {
 			}
 			}
 			
-			
+			/*
+			 * this system does not work because there are too many people being put in each airport
+			 */
 			if(person.getIdNo() % 3 == 0|| person.getIdNo() % 5 ==0 )
 			{
 				person.setLocation(laInternational);
 				laInternational.addPerson(person);
+				totalPopulation.remove(person);
 			}
 			
 			else if (person.getIdNo() % 7 == 0)
 			{
 				person.setLocation(privateAirport1);
 				privateAirport1.addPerson(person);
+				totalPopulation.remove(person);
 			}
 			
 			else if (person.getIdNo() % 9 == 0)
 			{
 				person.setLocation(militaryAirport1);
 				militaryAirport1.addPerson(person);
+				totalPopulation.remove(person);
 			}
 			
 			//this will be my catch cluase
@@ -138,7 +143,11 @@ public class Driver {
 			{
 				person.setLocation(oHare);
 				oHare.addPerson(person);
+				totalPopulation.remove(person);
 			}
+			/*
+			 * so by the end of this totalPopulation should be emptied and people should be in the airport ArrayLists
+			 */
 			totalPopulation.add(person);
 			System.out.println(person.toString());
 			if (i == desiredPopulation)
