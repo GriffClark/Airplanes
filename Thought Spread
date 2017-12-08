@@ -10,14 +10,14 @@ List of problems that need thinking through:
 5) what will the actual simulation look like for the AI
 6) what decisions can a airline company make
 	* buy planes
-	* build unique flight algorithims that are different from the basic one I create that everyone can use
+	* build unique flight algorithms that are different from the basic one I create that everyone can use
 	* figure out what speed planes will travel at, or build an algorithm different from the basic one that I will provide. However, fuel tables will remain the same
 	* figure out if they are transporting people or cargo, and set flight routes
 	* buy more planes
 	* re-fuel planes
 	* sell planes (for less then they bought them for, obviously
 	* take out a loan
-	*are you allowed to oversell a flight?
+	*are you allowed to over sell a flight?
 7) how is this all going to fit together on a grid
 8) what will the visual representation of this look like
 9) which other airplanes will I build, and where will I get the data for them?
