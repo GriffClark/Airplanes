@@ -24,7 +24,7 @@ public class Airbus_A380 extends PassengerPlane{
 			for (int j = 0; j < rangeMap[0].length; j++)
 			{
 				int desiredSpeed = i*15;
-				int fuelCost = (((desiredSpeed^3) - (maxSpeed * (1/2 * desiredSpeed)+1 )/maxSpeed) + (1/2 * maxSpeed));
+				int fuelCost =(int) (Math.pow(desiredSpeed, 1.3));
 				//this is the equation for range
 				rangeMap[i][0] = desiredSpeed; 
 				rangeMap[0][j] = fuelCost;
@@ -34,31 +34,31 @@ public class Airbus_A380 extends PassengerPlane{
 		 
 	}
 	
-	public void printChart() {
+	public void printChartDebug()
+	{
 		
-		for (int i = 0; i < rangeMap.length; i++)
-		{//this is doing weird things but I don't feel like fixing it now. Moved it out here to see if anything would change
-			int desiredSpeed = i*15;
-			rangeMap[i][0] = ((1/10) * desiredSpeed) + 1; //this is clearly not working please help
+		for (int i = 1; i < rangeMap.length; i++)
+		{
+			
 			for (int j = 0; j < rangeMap[0].length; j++)
 			{
-				if (i > 0) //cannot have desired speed be zero
-				{
-					
-					int fuelCost = (((desiredSpeed^3) - (maxSpeed * (1/2 * desiredSpeed)+1 )/maxSpeed) + (1/2 * maxSpeed));
-					//this is the equation for range
-					
-					rangeMap[i][j] = fuelCost;
-					System.out.print(rangeMap[i][j] + "\t");
-				}//also note that adding to the top half of this equation will make the plane more fuel efficient. Leave the back part alone
+				int desiredSpeed = i*15;
+				int fuelCost = (int)(Math.pow(desiredSpeed, 1.04)) ; //need to balance this with fuel capacity
+				//this is the equation for range
+				rangeMap[i][0] = desiredSpeed; 
+				rangeMap[0][j] = fuelCost;
+				System.out.print(desiredSpeed + " ");
+				System.out.println(fuelCost); //it's printing these out twice but that's fine for now
+				//also note that adding to the top half of this equation will make the plane more fuel efficient. Leave the back part alone
 			}
-			System.out.println();
+			
+		
 		}
 		
 	}
-		
-		
+
 	}
+		
 	
 	
 	

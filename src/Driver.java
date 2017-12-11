@@ -29,9 +29,17 @@ public class Driver {
 	 * @throws InterruptedException 
 	 */
 	
+	/*
+	 * Need to organize better. Going to put all the actions (ie putting people in an airport) in their own class
+	 * Driver class will just be for calling methods
+	 * All the things that should be methods here I am going to move over into a new class
+	 * This will fix a lot of the errors in the airport class
+	 */
+	
 
 	public static void main (String[] args) throws ParseException, InterruptedException
 	{
+		
 		//starting to initialize things 
 		
 		Scanner s = new Scanner (System.in);

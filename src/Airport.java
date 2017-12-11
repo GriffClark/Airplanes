@@ -6,8 +6,6 @@ public class Airport extends Position{
 		Commercial, Private, Military, Cargo //are these capitalized by convention?
 	}
 	
-	protected ArrayList<Airplane> planesAtAirport = new ArrayList<Airplane>();
-	protected ArrayList<Persons> people = new ArrayList<Persons>();
 	
 	
 	protected int maxPlanes;
@@ -97,7 +95,9 @@ public class Airport extends Position{
 	
 	public int planesAtAirport()
 	{
-		return planesAtAirport.size();
+		/**
+		 * I think I need to create an instance of driver that everything will use. 
+		 */
 	}
 	
 	
